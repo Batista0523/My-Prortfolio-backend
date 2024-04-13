@@ -3,7 +3,7 @@
 
 DROP TABLE IF EXISTS works_portfolio;
 DROP TABLE IF EXISTS contact_me;
-DROP TABLE IF EXISTS  constact_me;
+
 
 CREATE TABLE works_portfolio (
     id SERIAL PRIMARY KEY,

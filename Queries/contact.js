@@ -5,7 +5,7 @@ const { as } = require("pg-promise");
 
 const getAllMsg = async () => {
   try {
-    const allMsg = await db.any("SELECT * FROM contact_me");
+    const allMsg = await db.any('SELECT * FROM contact_me');
     return allMsg;
   } catch (err) {
     console.error("Error in getAllMsg", err);
@@ -14,7 +14,7 @@ const getAllMsg = async () => {
 };
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASSWORD,
@@ -24,14 +24,14 @@ const transporter = nodemailer.createTransport({
 const createContact = async (contact) => {
   try {
     const createdMsg = await db.one(
-      "INSERT INTO contact_me (username, email, msg) VALUES($1, $2, $3) RETURNING *",
+      'INSERT INTO contact_me (username, email, msg) VALUES($1, $2, $3) RETURNING *',
       [contact.username, contact.email, contact.msg]
     );
 
     const mailOptions = {
       from: contact.email,
       to: process.env.EMAIL,
-      subject: "New Message from Portfolio",
+      subject: 'New Message from Portfolio',
       text: `Name: ${contact.username}\nEmail: ${contact.email}\nMessage: ${contact.msg}`,
     };
 
@@ -39,13 +39,14 @@ const createContact = async (contact) => {
 
     return createdMsg;
   } catch (error) {
+  
     return error;
   }
 };
 const deleteMsg = async (id) => {
   try {
     const deletedMsg = await db.one(
-      "DELETE FROM contact_me WHERE id=$1 RETURNING *",
+      'DELETE FROM contact_me WHERE id=$1 RETURNING *',
       id
     );
     return deletedMsg;

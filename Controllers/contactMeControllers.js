@@ -23,7 +23,7 @@ contact.post("/", async (req, res) => {
     res.status(201).json(createdMseg);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ success: false, error: "Cannot create msg" });
+    return { success: false, error: "Failed to create message" };
   }
 });
 

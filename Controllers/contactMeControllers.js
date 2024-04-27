@@ -17,13 +17,14 @@ contact.get("/", async (req, res) => {
   }
 });
 
+
 contact.post("/", async (req, res) => {
   try {
     const createdMseg = await createContact(req.body);
     res.status(201).json(createdMseg);
   } catch (error) {
     console.error(error);
-    return { success: false, error: "Failed to create message" };
+    res.status(500).json({ success: false, error: "Failed to create message" });
   }
 });
 
